@@ -1,7 +1,5 @@
-package nl.astraeus
-
 import kotlinx.browser.document
-import nl.astraeus.handler.AudioWorkletHandler
+import handler.AudioWorkletHandler
 
 fun main() {
   AudioWorkletHandler.loadCode()

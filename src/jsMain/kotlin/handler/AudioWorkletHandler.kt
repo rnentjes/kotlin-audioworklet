@@ -1,4 +1,4 @@
-package nl.astraeus.handler
+package handler
 
 import kotlinx.browser.window
 import org.w3c.dom.MessageEvent

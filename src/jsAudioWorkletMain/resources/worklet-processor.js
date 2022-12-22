@@ -15,7 +15,7 @@ class WorkletProcessor extends AudioWorkletProcessor {
 
         console.log("worklet-processor.constructor", this, audioWorklet);
 
-        audioWorklet.nl.astraeus.processor.WorkletProcessor.setPort(this.port);
+        audioWorklet.WorkletProcessor.setPort(this.port);
 
         console.log("STARTED worklet-processor.js");
     }
@@ -39,7 +39,7 @@ class WorkletProcessor extends AudioWorkletProcessor {
             } else {
                 samplesToProcess = outputs[0][0].length;
 
-                audioWorklet.nl.astraeus.processor.WorkletProcessor.process(
+                audioWorklet.WorkletProcessor.process(
                     samplesToProcess,
                     outputs[0][0],
                     outputs[0][1]
