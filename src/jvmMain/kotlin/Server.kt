@@ -1,5 +1,3 @@
-package nl.astraeus.application
-
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.engine.embeddedServer
