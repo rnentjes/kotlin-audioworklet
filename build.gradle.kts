@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.IR
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.7.20"
+    kotlin("multiplatform") version "1.8.10"
     application
 }
 
@@ -62,11 +62,11 @@ kotlin {
 }
 
 application {
-    mainClass.set("nl.astraeus.application.ServerKt")
+    mainClass.set("ServerKt")
 }
 
 tasks.named<Copy>("jvmProcessResources") {
-    val jsBrowserDistribution = tasks.named("jsBrowserDistribution")
+    val jsBrowserDistribution = tasks.named("jsBrowserDevelopmentWebpack")
     from(jsBrowserDistribution)
     from(tasks.named("jsAudioWorkletBrowserDistribution"))
 }

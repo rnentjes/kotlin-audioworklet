@@ -7,6 +7,9 @@ import org.w3c.dom.MessagePort
 import kotlin.math.PI
 import kotlin.math.sin
 
+const val PI2 = PI * 2
+const val NOTE_LENGTH = 2500
+
 @ExperimentalJsExport
 @JsExport
 object WorkletProcessor {
@@ -15,6 +18,8 @@ object WorkletProcessor {
   var counter: Int = 0
   var note = Note.C2
   var offset = 0.0
+
+  var note_length = 2500
 
   @JsName("setPort")
   fun setPort(port: MessagePort) {
@@ -26,17 +31,25 @@ object WorkletProcessor {
   fun onMessage(message: MessageEvent) {
     console.log("WorkletProcessor: Received message", message)
 
-    when (message.data) {
-      "start" -> {
-        println("Start worklet!")
+    val data = message.data
+    if (data is String) {
+      val parts = data.split("\n")
+      when (parts[0]) {
+        "start" -> {
+          println("Start worklet!")
+        }
+
+        "stop" -> {
+
+        }
+
+        "set_note_length" -> {
+          note_length = parts[1].toInt()
+        }
+
+        else ->
+          console.error("Don't kow how to handle message", message)
       }
-
-      "stop" -> {
-
-      }
-
-      else ->
-        console.error("Don't kow how to handle message", message)
     }
   }
 
@@ -46,10 +59,14 @@ object WorkletProcessor {
     var delta = note.sampleDelta
 
     for (sample in 0 until samples) {
-      var value = sin(offset * 2 * PI)
+      var value = sin(offset * PI2) +
+          sin(offset * 2 * PI2) * 0.5 +
+          sin(offset * 3 * PI2) * 0.25 +
+          sin(offset * 4 * PI2) * 0.15
       offset += delta
 
-      val noteProgress = tmpCounter % 5000
+      // new note every NOTE_LENGTH samples
+      val noteProgress = tmpCounter % note_length
       if (noteProgress == 0) {
         note = note.transpose(1)
         if (note == Note.C7) {
@@ -57,7 +74,8 @@ object WorkletProcessor {
         }
         delta = note.sampleDelta
       }
-      value *= (1.0 - noteProgress / 5000.0)
+      // simple envelop from max to 0 every note
+      value *= (1.0 - noteProgress / note_length.toDouble())
 
       left[sample] = value
       right[sample] = value

@@ -159,4 +159,7 @@ object AudioWorkletHandler : AudioWorklet(
     audioWorkletMessagePort?.postMessage("start")
   }
 
+  fun setNoteLength(length: Int) {
+    audioWorkletMessagePort?.postMessage("set_note_length\n$length")
+  }
 }

@@ -14,15 +14,31 @@ fun HTML.index() {
   }
   body {
     div {
-      +"Hello from Ktor"
+      +"We need a button to start because we can only start audio from a user event"
+    }
+    div("button_div") {
+      span("button") {
+        id = "clicker"
+
+        +"Start"
+      }
     }
     div {
-      id = "root"
+      + "An example of how to interact with the audioworklet:"
     }
-    span("button") {
-      id = "clicker"
-
-      + "Start"
+    div {
+      label {
+        htmlFor = "noteLength"
+        +"Note length (in samples):"
+      }
+      input {
+        id = "noteLength"
+        type = InputType.number
+        value = "2500"
+        min = "1"
+        max = "100000"
+        step = "100"
+      }
     }
     script(src = "/static/kotlin-audioworklet.js") {}
   }
