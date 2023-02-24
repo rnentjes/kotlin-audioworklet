@@ -19,14 +19,10 @@ fun main() {
     }, "")
   }
 
-  print("get noteLength")
   document.getElementById("noteLength")?.also {
-    println("Set noteLength event")
     it.addEventListener("change", {
-      println("Set noteLength 1")
       val target = it.target
       if (target is HTMLInputElement) {
-        println("Set noteLength 2")
         AudioWorkletHandler.setNoteLength(target.value.toInt())
       }
     }, "")

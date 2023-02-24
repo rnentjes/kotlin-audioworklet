@@ -8,7 +8,6 @@ import kotlin.math.PI
 import kotlin.math.sin
 
 const val PI2 = PI * 2
-const val NOTE_LENGTH = 2500
 
 @ExperimentalJsExport
 @JsExport
@@ -60,9 +59,9 @@ object WorkletProcessor {
 
     for (sample in 0 until samples) {
       var value = sin(offset * PI2) +
-          sin(offset * 2 * PI2) * 0.5 +
-          sin(offset * 3 * PI2) * 0.25 +
-          sin(offset * 4 * PI2) * 0.15
+          sin(offset * 2 * PI2) * 0.6 +
+          sin(offset * 3 * PI2) * 0.4 +
+          sin(offset * 4 * PI2) * 0.3
       offset += delta
 
       // new note every NOTE_LENGTH samples
