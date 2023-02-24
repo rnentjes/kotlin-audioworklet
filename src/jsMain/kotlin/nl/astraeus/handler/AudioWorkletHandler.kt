@@ -159,7 +159,15 @@ object AudioWorkletHandler : AudioWorklet(
     audioWorkletMessagePort?.postMessage("start")
   }
 
+  fun stop() {
+    audioWorkletMessagePort?.postMessage("stop")
+  }
+
   fun setNoteLength(length: Int) {
     audioWorkletMessagePort?.postMessage("set_note_length\n$length")
+  }
+
+  fun setHarmonics(length: Int) {
+    audioWorkletMessagePort?.postMessage("harmonics\n$length")
   }
 }

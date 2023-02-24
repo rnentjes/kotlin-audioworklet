@@ -9,13 +9,23 @@ fun main() {
 
   println("Ok")
 
-  document.getElementById("clicker")?.also {
+  document.getElementById("startButton")?.also {
     it.addEventListener("click", {
-      AudioWorkletHandler.createContext {
-        println("Created context")
+      if (AudioWorkletHandler.audioContext == null) {
+        AudioWorkletHandler.createContext {
+          println("Created context")
 
+          AudioWorkletHandler.start()
+        }
+      } else {
         AudioWorkletHandler.start()
       }
+    }, "")
+  }
+
+  document.getElementById("stopButton")?.also {
+    it.addEventListener("click", {
+        AudioWorkletHandler.stop()
     }, "")
   }
 
@@ -24,6 +34,14 @@ fun main() {
       val target = it.target
       if (target is HTMLInputElement) {
         AudioWorkletHandler.setNoteLength(target.value.toInt())
+      }
+    }, "")
+  }
+  document.getElementById("harmonics")?.also {
+    it.addEventListener("change", {
+      val target = it.target
+      if (target is HTMLInputElement) {
+        AudioWorkletHandler.setHarmonics(target.value.toInt())
       }
     }, "")
   }

@@ -14,13 +14,19 @@ fun HTML.index() {
   }
   body {
     div {
-      +"We need a button to start because we can only start audio from a user event"
+      +"We need a button to start because we can only start audio from a user event:"
     }
     div("button_div") {
       span("button") {
-        id = "clicker"
+        id = "startButton"
 
         +"Start"
+      }
+
+      span("button") {
+        id = "stopButton"
+
+        +"Stop"
       }
     }
     div {
@@ -38,6 +44,19 @@ fun HTML.index() {
         min = "1"
         max = "100000"
         step = "100"
+      }
+    }
+    div {
+      label {
+        htmlFor = "harmonics"
+        +"Number of harmonics:"
+      }
+      input {
+        id = "harmonics"
+        type = InputType.number
+        value = "3"
+        min = "1"
+        max = "10"
       }
     }
     script(src = "/static/kotlin-audioworklet.js") {}
