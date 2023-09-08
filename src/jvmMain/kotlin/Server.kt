@@ -18,6 +18,12 @@ fun HTML.index() {
     }
     div("button_div") {
       span("button") {
+        id = "createButton"
+
+        +"Create"
+      }
+
+      span("button") {
         id = "startButton"
 
         +"Start"

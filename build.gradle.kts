@@ -1,10 +1,9 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.VAR
-import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.LEGACY
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.IR
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.VAR
 
 plugins {
-    kotlin("multiplatform") version "1.8.10"
+    kotlin("multiplatform") version "1.9.0"
     application
 }
 
@@ -17,6 +16,13 @@ repositories {
 }
 
 val jsMode = IR
+
+tasks.withType<KotlinJsCompile>().configureEach {
+    kotlinOptions {
+        moduleKind = "es"
+        useEsClasses = true
+    }
+}
 
 kotlin {
     jvm {

@@ -8,7 +8,6 @@ import kotlin.math.pow
  * Time: 11:50
  */
 
-var sampleRate: Int = 44100
 
 enum class Note(
   val description: String
@@ -144,6 +143,10 @@ enum class Note(
     values().firstOrNull { it.ordinal == result } ?: this
   } else {
     this
+  }
+
+  companion object {
+    var sampleRate: Int = 44100
   }
 
   /*
